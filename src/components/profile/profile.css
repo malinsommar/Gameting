@@ -1,0 +1,42 @@
+.profileWrapper {
+  display: grid;
+  width: 100%;
+  padding: 15px 0 15px 0;
+}
+
+.profileImage {
+  width: 10vh;
+  border-radius: 50%;
+}
+
+.profileDropDown {
+  display: none;
+  position: absolute;
+  right: 0px;
+  background-color: #aa9bff;
+  color: white;
+  min-width: 100px;
+  padding: 12px 16px;
+  z-index: 10;
+  margin-top: 77px;
+}
+
+.profileWrapper:hover .profileDropDown {
+  display: block;
+}
+
+.profileDropDown a {
+  display: block;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.profileDropDown a:hover {
+  background-color: #9989f0;
+}
+
+.profileHr {
+  border: none;
+  background-color: white;
+  height: 1px;
+}
