@@ -40,7 +40,7 @@ export const Routing = (props) => {
                 {props.children}
                 <Switch>    
                     <Route exact path={RoutingPath.homeView} component={blockRouteIfNotAuthenticated(HomeView)}/>
-                    <Route exact path={RoutingPath.contactView} component={blockRouteIfNotAuthenticated(ContactView)}/>
+                    <Route exact path={RoutingPath.contactView} component={ContactView}/>
                     <Route exact path={RoutingPath.matchRequestView} component={blockRouteIfNotAuthenticated(MatchRequestView)}/>
                     <Route exact path={RoutingPath.matchView} component={blockRouteIfNotAuthenticated(MatchView)}/>
                     <Route exact path={RoutingPath.messagesView} component={blockRouteIfNotAuthenticated(MessagesView)}/>

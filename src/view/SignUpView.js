@@ -1,5 +1,6 @@
 import React from 'react'
-import Stepper from '../components/stepper/Stepper'
+import Stepper from '../components/signUpStepper/Stepper'
+
 export const SignUpView = () => {
 
     return(

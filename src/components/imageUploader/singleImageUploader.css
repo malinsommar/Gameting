@@ -1,0 +1,37 @@
+.upload__image-wrapper {
+  background-color: rgb(252, 252, 252);
+  height: 230px;
+  width: 230px;
+  border-radius: 50%;
+}
+
+.image-item {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+.profile-upload-image {
+  border-radius: 50%;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.initialButton {
+  position: absolute;
+  left: 80px;
+  bottom: 60px;
+}
+
+.firstButton {
+  position: absolute;
+  left: 110px;
+  bottom: 100px;
+}
+
+.secondButton {
+  position: absolute;
+  left: 70px;
+  bottom: 105px;
+}

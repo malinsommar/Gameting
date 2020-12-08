@@ -16,7 +16,7 @@ export const Profile = () => {
 
     return(
         <div className="profileWrapper">
-            <img className="profileImage" src={"https://thispersondoesnotexist.com/image"}/>
+            <img alt="your profile" className="profileImage" src={"https://thispersondoesnotexist.com/image"}/>
             <div className="profileDropDown">
                 <a onClick={() => history.push(RoutingPath.profileView)}>My profile</a>
                 <a onClick={() => history.push(RoutingPath.settingsView)}>Settings</a>

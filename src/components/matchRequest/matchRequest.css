@@ -1,0 +1,29 @@
+.matchRequestImageBox {
+}
+
+.matchRequestImage {
+  width: 220px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.matchRequestButton {
+  border-radius: 10px;
+  border: none;
+  padding: 5px 20px 5px 20px;
+}
+
+.profile {
+  position: relative;
+  bottom: 40px;
+  left: 90px;
+  background-color: white;
+}
+
+.accept {
+  background-color: white;
+}
+
+.decline {
+  background-color: rgb(245, 150, 150);
+}

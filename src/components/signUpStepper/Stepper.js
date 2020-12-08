@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
+import {useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -11,7 +12,11 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import DatePicker from '../datePicker/datePicker';
+import ImageUploader from '../imageUploader/singleImageUploader';
+import TextField from '../textFields/textField'
+import PasswordField from '../textFields/passwordField'
+import SelectField from '../textFields/selectFields'
 
 import './stepper.css'
 
@@ -65,13 +70,13 @@ const ColorlibConnector = withStyles({
   active: {
     '& $line': {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+      'linear-gradient( 95deg,#aa9bff 0%, #8677db 50%, #8e7fe0 100%)',
     },
   },
   completed: {
     '& $line': {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,#aa9bff 0%, #8677db 50%, #8e7fe0 100%)',
     },
   },
   line: {
@@ -96,12 +101,12 @@ const useColorlibStepIconStyles = makeStyles({
   },
   active: {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 136deg, #aa9bff 0%, #8677db 50%, #8e7fe0 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   },
   completed: {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 136deg, #aa9bff 0%, #8677db 50%, #8e7fe0 100%)',
   },
 });
 
@@ -154,10 +159,11 @@ export default function CustomizedSteppers() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+  const history = useHistory();
 
   const handleNext = () => {
     if (activeStep === 2) {
-      alert("Klart") // länka till login och skapa användare
+      history.push('/')// --------------skapa användare-----------------
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -168,7 +174,7 @@ export default function CustomizedSteppers() {
 
   const getStepperButtons = () => {
     return (
-      <div>
+      <div className="stepperButtons">
         <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
           Back
         </Button>
@@ -184,41 +190,67 @@ export default function CustomizedSteppers() {
     )
   }
 
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+  const [controlPassword, setControlPassword] = useState("");
+  const [name, setName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [sex, setSex] = useState("");
+  const [partnerSex, setPartnerSex] = useState("");
+  const partnerGender = useRef(null);
+  const [partnerMinAge, setPartnerMinAge] = useState("");
+  const [partnerMaxAge, setPartnerMaxAge] = useState("");
+
   const getStepData = () => {
     if(activeStep === 0){
       return <div className="stepperDataCard">
         <h1>Account:</h1>
-        <p>Mail:</p>
-        <p>Password:</p>
-        <p>Repeat password:</p>
-        {getStepperButtons()}
+        <div className="stepperContent">
+          <TextField type="standard-basic" text="Mail" onChange={event => setMail(event.target.value)}/>
+          <div className="stepperRight">
+            <PasswordField text="Password" /> 
+            <PasswordField text="Repeat password" /> 
+          </div>
+          <p className="stepperLeft">Terms and agreemenst? [  ]</p>
+          {getStepperButtons()}
+        </div>
       </div>
     }
     else if(activeStep === 1){
       return <div className="stepperDataCard">
-       <h1>About you:</h1>
-       <p>First name:</p>
-       <p>Last name:</p>
-       <p>Birthday:</p>      
-       <p>Sex:</p>      
-       {getStepperButtons()}
+       <div className="stepperContent">
+        <div className="stepperLeft">
+        <h1>About you:</h1>
+          <TextField type="standard-basic" text="First name" onChange={event => setName(event.target.value)}/>
+          <SelectField /*onChange={event => setSex(event.target.value)}*/ />
+          <div className="stepperDatePicker">
+            <DatePicker text="Birthday" />
+          </div>
+          <p>{birthday}</p>
+        </div>
+        <div className="stepperRight">
+        <ImageUploader id="stepperImageUploader"/>
+        </div>
+        {getStepperButtons()}
+        </div>
        </div>
     }
     else return <div className="stepperDataCard">
     <h2>I look for someone with these stats:</h2>
-    <p>Sex:</p>
-    <p>Age range:</p>
-    {getStepperButtons()}
+      <div className="stepperContent">
+        <TextField type="standard-basic" text="Min age" onChange={event => setPartnerMinAge(event.target.value)}/>
+        <TextField type="standard-basic" text="Max age" onChange={event => setPartnerMaxAge(event.target.value)}/>
+        <SelectField /*onChange={event => setPartnerSex(event.target.value)}*/ />
+        {getStepperButtons()}
+      </div>
     </div>
   }
 
   return (
     <div className={classes.root}>
-
-    <div className="activeStepCard">
-      {getStepData()}
-    </div>
-
+      <div className="activeStepCard">
+        {getStepData()}
+      </div>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
