@@ -1,16 +1,20 @@
 import React, {useContext} from 'react'
-import { UserContext } from '../../shared/global/provider/UserProvider'
+import {useAuth} from '../../shared/global/provider/UserProvider'
 import './profile.css'
 import {useHistory} from 'react-router-dom'
 import RoutingPath from '../../routes/RoutingPath'
+import ProfileIcon from '@material-ui/icons/AccountCircleOutlined'
+import SettingsIcon from '@material-ui/icons/SettingsOutlined'
+import MessageIcon from '@material-ui/icons/ForumOutlined'
+import MatchIcon from '@material-ui/icons/FavoriteBorderOutlined'
+import LogOutIcon from '@material-ui/icons/ExitToAppOutlined'
 
 export const Profile = () => {
     const history = useHistory()
-    const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
+    const {signOut} = useAuth()
 
     const logout = () => {
-        localStorage.removeItem('name')
-        setAuthenticatedUser(false)
+        signOut()
         history.push(RoutingPath.signInView)
     }
 
@@ -18,12 +22,14 @@ export const Profile = () => {
         <div className="profileWrapper">
             <img alt="your profile" className="profileImage" src={"https://thispersondoesnotexist.com/image"}/>
             <div className="profileDropDown">
-                <a onClick={() => history.push(RoutingPath.profileView)}>My profile</a>
-                <a onClick={() => history.push(RoutingPath.settingsView)}>Settings</a>
-                <a onClick={() => history.push(RoutingPath.messagesView)}>Messages</a>
-                <a onClick={() => history.push(RoutingPath.matchRequestView)}>Match requests</a>
-                <hr className="profileHr"/>
-                <a onClick={() => logout()}>Log out</a>
+                <ul>
+                    <li onClick={() => history.push(RoutingPath.profileView)}><ProfileIcon className="profileDropDownIcon" />My profile</li>
+                    <li onClick={() => history.push(RoutingPath.settingsView)}><SettingsIcon className="profileDropDownIcon" />Settings</li>
+                    <li onClick={() => history.push(RoutingPath.messagesView)}><MessageIcon className="profileDropDownIcon" />Messages</li>
+                    <li onClick={() => history.push(RoutingPath.matchRequestView)}><MatchIcon className="profileDropDownIcon" />Match requests</li>
+                    <hr className="profileHr"/>
+                    <li onClick={() => logout()}><LogOutIcon className="profileDropDownIcon" />Log out</li>
+                </ul>
             </div>
         </div>
     )

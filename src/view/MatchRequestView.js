@@ -1,6 +1,7 @@
 import React from 'react'
 import MultiCarousel from '../components/multiCarousel/MultiCarousel'
 import MatchRequests from '../components/matchRequest/MatchRequest'
+import './matchRequestView.css'
 
 export const MatchRequestView = () => {
 

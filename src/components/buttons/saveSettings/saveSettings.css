@@ -1,0 +1,14 @@
+.saveSettingsButton button {
+  background-color: white;
+  color: black;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.saveSettingsButton button:hover {
+  background-color: rgb(243, 243, 243);
+}

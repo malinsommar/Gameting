@@ -1,0 +1,10 @@
+{
+    "emailJsServiceKey": "service_csgrrsk",
+    "emailJsTemplateKey": "template_kac3rno",
+    "emailJsUserKey": "user_t9A39FNEVHXaelNygyUfN",
+
+    "contactFormMailError": "Please enter your mail",
+    "contactFormNameError": "Please enter your name",
+    "contactFormError": "Something went wrong, please try again later",
+    "contactFormSuccess": "Message successfully sent."
+}

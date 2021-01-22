@@ -1,0 +1,30 @@
+.contactDiv {
+  display: flex;
+  background-color: #aa9bff;
+  margin: 0 auto;
+  margin-top: 7%;
+  width: 50vw;
+  color: white;
+  align-items: center;
+}
+
+.contactTextDiv {
+  margin: 0 auto;
+}
+
+.contactFormDiv {
+  margin: 0 auto;
+}
+
+.submitButton {
+  width: 100%;
+  height: 30px;
+  background-color: transparent;
+  color: white;
+  border: 1.5px solid white;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  margin: 30px 0 10px 0;
+  font-family: pixelFont;
+}

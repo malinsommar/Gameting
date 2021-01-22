@@ -2,16 +2,16 @@ import React, {useContext} from 'react'
 import './NavigationBar.css'
 import Logotype from '../../shared/images/gameLogotype.svg'
 import { useHistory } from 'react-router-dom'
-import {UserContext} from '../../shared/global/provider/UserProvider'
+import {useAuth} from '../../shared/global/provider/UserProvider'
 import {Profile} from '../profile/profile'
 import RoutingPath from '../../routes/RoutingPath'
 
 export const NavigationBar = () => {
     const history = useHistory();
-    const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
+    const {currentUser} = useAuth()
 
     const displayUserIfAuthenticated = () => {
-        return (authenticatedUser) 
+        return (currentUser) 
         ? <div className="profileNavigation"><Profile /></div>
         : <span onClick={() => history.push(RoutingPath.signUpView)} className="navigation" id="signInNavigation">Sign Up</span>
     }

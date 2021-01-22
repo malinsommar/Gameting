@@ -1,6 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import {UserContext} from '../shared/global/provider/UserProvider'
+import {useAuth} from '../shared/global/provider/UserProvider'
+
 import RoutingPath from './RoutingPath'
 
 import {HomeView} from '../view/HomeView'
@@ -15,23 +16,14 @@ import {SignUpView} from '../view/SignUpView'
 
 export const Routing = (props) => {
 
-    const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
+    const {currentUser} = useAuth()
 
     const blockRouteIfAuthenticated = (navigateToView) => {
-        return authenticatedUser ? HomeView : navigateToView
+        return currentUser ? HomeView : navigateToView
     }
 
     const blockRouteIfNotAuthenticated = (navigateToView) => {
-        return !authenticatedUser ? SignInView: navigateToView
-    }
-
-    useEffect(() => {
-        checkIfUserIfAuthenticated()
-    }, [])
-    
-
-    const checkIfUserIfAuthenticated = () => {
-        setAuthenticatedUser(localStorage.getItem("name"))
+        return !currentUser ? SignInView: navigateToView
     }
 
     return(

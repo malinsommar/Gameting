@@ -1,0 +1,23 @@
+{
+    "games": [
+        { "name":"Overwatch", "background_image": "https://bnetcmsus-a.akamaihd.net/cms/blog_thumbnail/u9/U9OR9LSH8R7U1590775227064.png"},
+        { "name":"The Witcher 3: Wild hunt", "background_image": "https://images.gog-statics.com/60c724a052275a049d857d53957dc38e9347742f52372bb956d992b43efa8fb5_product_card_v2_mobile_slider_639.jpg" },
+        { "name":"Skyrim", "background_image": "https://hb.imgix.net/12d1d9ac840e649ca0d749b0e5d8b403d310b10e.jpeg?auto=compress,format&fit=crop&h=353&w=616&s=ea7b42b6e2b1535675ccca94ba8c0b95" },
+        { "name":"World of Warcraft", "background_image": "https://i.pcmag.com/imagery/articles/01DT6925CNSbhDhYF6vCY7F-1.fit_scale.size_1028x578.v1569486318.jpg"},
+        { "name":"CS:GO", "background_image": "https://media.steampowered.com/apps/csgo/blog/images/fb_image.png?v=6" },
+        { "name":"Call of Duty: Cold war", "background_image": "https://myogaming.se/wp-content/uploads/2020/09/cod-black-ops-cold-war-cover-1597947738556-1.jpg" },
+        { "name":"Call of Duty: Black ops", "background_image": "https://steamcdn-a.akamaihd.net/steam/apps/42700/capsule_616x353.jpg?t=1568840430" },
+        { "name":"Call of Duty: Modern warfare", "background_image": "https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/kronos/common/social-share/social-share-image.jpg" },
+        { "name":"Fifa 2020", "background_image": "https://cdn.arstechnica.net/wp-content/uploads/2020/03/FIFA-20-demo-1168115.jpg" },
+        {"name": "Grand Theft Auto V", "background_image": "https://cdn2.unrealengine.com/Diesel%2Fproductv2%2Fgrand-theft-auto-v%2Fhome%2FGTAV_EGS_Artwork_1920x1080_Hero-Carousel_V06-1920x1080-1503e4b1320d5652dd4f57466c8bcb79424b3fc0.jpg?h=1080&resize=1&w=1920"},
+        {"name": "The Legend of Zelda: Breath of the Wild", "background_image": "https://www.nintendo.com/content/dam/noa/en_CA/games/switch/t/the-legend-of-zelda-breath-of-the-wild-switch/the-legend-of-zelda-breath-of-the-wild-switch-hero.jpg"},
+        {"name": "Red Dead Redemption 2", "background_image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg?t=1606935465"},
+        {"name": "Resident Evil 4", "background_image": "https://store-images.s-microsoft.com/image/apps.53379.65720361252122895.6705784f-9e29-4778-8df4-707828cc2c63.ee9966d3-c938-465e-8dc1-70b97441a8f8?mode=scale&q=90&h=1080&w=1920"},
+        {"name": "Dota 2", "background_image": "https://upload.wikimedia.org/wikipedia/en/0/0b/Dota_2_%28Steam_2019%29.jpg"},
+        {"name": "Batman: Arkham City", "background_image": "https://cdn2.unrealengine.com/Diesel%2Fproductv2%2Fbatman-arkham-city%2FEGS_WB_Batman_Arkham_City_G1_1920x1080_19_0911-1920x1080-24a7b872daf28b18cfdac0ae92e656964786a0ce.jpg"},
+        {"name": "Spelunky", "background_image": "https://miro.medium.com/max/3840/1*v9inT8NaMQX7f6ivzsaWcg.jpeg"},
+        {"name": "League of Legends", "background_image": "https://i2.wp.com/www.techdigest.tv/wp-content/uploads/2020/09/league-of-legends.jpg?ssl=1"},
+        {"name": "Portal 2", "background_image": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/header.jpg?t=1610490805"},
+        {"name": "Fortnite", "background_image": "https://image-cdn.essentiallysports.com/wp-content/uploads/20200617190129/fortnite-season-3-battle-pass-skins.jpg"}
+      ]
+}

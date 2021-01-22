@@ -1,0 +1,110 @@
+/* -- Buttons/Navbar -- */
+
+.settingsButtonsDiv {
+  display: flex;
+  width: 60vw;
+  margin: 0 auto;
+  margin-top: 3vh;
+}
+
+#partnerSettingsButton,
+#accountSettingsButton,
+#favoriteGamesSettingsButton {
+  margin: 0 auto;
+}
+
+#partnerSettingsButton svg {
+  width: 85px;
+  position: relative;
+  left: 50px;
+}
+
+#accountSettingsButton svg {
+  position: relative;
+  left: 28px;
+}
+
+#favoriteGamesSettingsButton svg {
+  position: relative;
+  left: 2px;
+}
+
+.settingsHr {
+  border: none;
+  height: 1.5px;
+  background-color: #aa9bff;
+  width: 60%;
+}
+
+/* -- Partner -- */
+
+.settingsPartnerDiv {
+  background-color: #dad4ff;
+  text-align: center;
+  width: 300px;
+  height: 320px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 10px 0;
+}
+
+.settingsPartnerDiv h1 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+#partnerSettingsSaveButton {
+  margin-top: 20px;
+}
+
+/* -- Account -- */
+
+.settingsChangePasswordDiv {
+  background-color: #dad4ff;
+  margin-right: 100px;
+  padding: 10px 20px;
+  margin-left: 28%;
+}
+
+.settingsScaryButtonDiv {
+  text-align: center;
+  border-radius: 50%;
+  margin-top: 90px;
+}
+
+.scaryButtonText {
+  background-color: #dad4ff;
+  height: 100px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.settingsScaryButtonDiv button {
+  background-color: #ff1616;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 17px;
+  cursor: pointer;
+}
+
+.settingsScaryButtonDiv button:hover {
+  background-color: #e41111;
+}
+
+#changePasswordButton {
+  margin-top: 20px;
+  margin-left: 140px;
+}
+
+/* -- Games -- */
+.settingsYourGamesDiv {
+  height: 700px;
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.settingsAddGamesDiv {
+  width: 1100px;
+  height: 800px;
+  margin: 0 auto;
+}

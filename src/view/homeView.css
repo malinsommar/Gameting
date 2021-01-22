@@ -1,0 +1,37 @@
+.homePage {
+  display: flex;
+}
+
+.homeLeftSection {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.homeLeftSection h1 {
+  position: relative;
+  top: 80px;
+  font-size: 3.5vw;
+}
+
+.homeNewNotiflications {
+  color: white;
+  background-color: #aa9bff;
+  border-radius: 50%;
+  height: 320px;
+  width: 320px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.homeNewNotiflications p {
+  position: relative;
+  top: 120px;
+  font-size: 1.6vw;
+  cursor: pointer;
+}
+
+.homeRightSection {
+  margin: 0 auto;
+  margin-right: 10vw;
+  margin-top: 29vh;
+}

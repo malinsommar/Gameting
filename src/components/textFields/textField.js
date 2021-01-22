@@ -16,7 +16,7 @@ const BasicTextFields = ({type, rows, text, onChange, multiline}) => {
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField id={type} multiline={multiline} label={text} onChange={onChange} rows={rows} />
+      <TextField color="primary" id={type} multiline={multiline} label={text} onChange={onChange} rows={rows} />
     </form>
   );
 }

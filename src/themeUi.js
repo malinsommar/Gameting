@@ -1,5 +1,4 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { deepPurple, amber } from '@material-ui/core/colors';
 
 const themeUi = createMuiTheme({
 
@@ -9,8 +8,8 @@ const themeUi = createMuiTheme({
       contrastText: '#ffffff'
     },
     secondary: {
-      main: amber[500],
-      contrastText: deepPurple[900],
+      main: '#ffffff',
+      contrastText: '#ffffff',
     },
   },
 });

@@ -42,12 +42,14 @@
 
 .profileRequestButton {
   position: relative;
-  bottom: 48px;
+  right: 0.2vw;
+  bottom: 8vh;
   border-radius: 15px;
   border: none;
-  padding: 7px 25px 7px 25px;
-  margin: 5px;
+  padding: 1vh 2vw 1vh 2vw;
+  margin: 0.7vw;
   outline: none;
+  font-size: 1.1vw;
 }
 
 .profileRequestButton:hover {
@@ -81,12 +83,79 @@
   color: white;
 }
 
+.profileStatBox h1 {
+  font-size: 3.5vw;
+  margin-left: 40px;
+  margin-bottom: -10px;
+}
+
+.profileStatBox li {
+  font-size: 1.5vw;
+}
+
+.profileStatList {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 19px;
+}
+
+.profileStatsIcon {
+  position: relative;
+  top: 21px;
+  margin-bottom: 7px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
 /*-- Image & game box --*/
 
 .imageOrGameDiv {
   margin-left: 5%;
-  margin-top: 6%;
-  background-color: rgb(204, 204, 204);
+  margin-top: 5.5%;
   height: 60vh;
   width: 35vw;
+}
+
+.imageOrGameDivButtons {
+  display: flex;
+}
+
+#imageOrGameDivButtonImages {
+  margin: 0 auto;
+  margin-left: 75px;
+}
+
+#imageOrGameDivButtonGames {
+  margin: 0 auto;
+}
+
+#imageOrGameDivButtonGames svg {
+  width: 55px;
+  position: relative;
+  left: 2px;
+}
+
+.imageOrGameDiv hr {
+  border: none;
+  height: 1.5px;
+  background-color: #9584ff;
+}
+
+.galleryButton {
+  background-color: white;
+  border: solid 1.5px #9584ff;
+  padding: 5px 10px;
+  margin: 5px;
+  outline: none;
+  width: 98%;
+}
+
+.galleryButton:hover {
+  border: solid 1.5px #5d4ebd;
+}
+
+.profileGames {
+  height: 360px;
+  width: 445px;
+  overflow: overlay;
 }

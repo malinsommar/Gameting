@@ -17,6 +17,18 @@ button {
   font-family: pixelFont;
 }
 
+.blueText {
+  color: rgb(134, 161, 248);
+}
+
+.pinkText {
+  color: rgb(248, 134, 153);
+}
+
+.darkPurpleText {
+  color: #5e17eb;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

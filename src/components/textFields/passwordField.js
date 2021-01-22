@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PasswordField = ({text, onChange}) => {
+const PasswordField = ({text, onChange, className}) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     amount: '',
@@ -54,6 +54,7 @@ const PasswordField = ({text, onChange}) => {
           <InputLabel htmlFor="standard-adornment-password">{text}</InputLabel>
           <Input
             id="standard-adornment-password"
+            className={className}
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
