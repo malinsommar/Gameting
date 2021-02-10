@@ -7,6 +7,8 @@ const profileView = "/profile"
 const settingsView = "/settings"
 const signInView = "/"
 const signUpView = "/signUp"
+const newAccountView = "/newAccount"
+const forgotPassword = "/resetPassword"
 
 export default {
     homeView,
@@ -17,5 +19,7 @@ export default {
     profileView,
     settingsView,
     signInView,
-    signUpView
+    signUpView,
+    newAccountView,
+    forgotPassword
 }

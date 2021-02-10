@@ -1,6 +1,4 @@
 import React , {useState, useContext} from 'react'
-import TextField from '../components/textFields/textField'
-import PasswordField from '../components/textFields/passwordField'
 import {useAuth} from '../shared/global/provider/UserProvider'
 import {useHistory} from 'react-router-dom'
 import './signInView.css'
@@ -15,7 +13,6 @@ export const SignInView = () => {
 
   async function login(e) {
     e.preventDefault()
-
     try {
         setError("")
         setLoading(true)
@@ -45,31 +42,30 @@ export const SignInView = () => {
 
     const logInBox = () => {
         return(
-            <div>
+            <div className="logInDiv">
+            <h2>Sign in</h2>
                 <form onSubmit={login}>
+                    <p>Mail: </p>
                     <input
-                    type='text'
-                    onChange={event => setName(event.target.value)}
+                        className="inputField"
+                        type='text'
+                        onChange={event => setName(event.target.value)}
                     />
+                    <p>Password: </p>
                     <input
-                    type='password'
-                    onChange={event => setPassword(event.target.value)}
-                    />
+                        className="inputField"
+                        type='password'
+                        onChange={event => setPassword(event.target.value)}
+                    /> <br />
                     <input
-                    type='submit'
+                        className="logInButton"
+                        type='submit'
+                        value="Login"
                     />
                 </form>
+                <p className="clickable" onClick={() => history.push("/signUp")}>Dont have an account? Sign up!</p>
+                <p className="clickable" onClick={() => history.push("/resetPassword")}>Forgot your password?</p>
             </div>
-           /* <div className="logInDiv">
-                <h2>Sign in</h2>
-                <TextField type="standard-basic" text="Mail" onChange={event => setName(event.target.value)}/>
-                <div className="logInPas">
-                    <TextField type="standard-basic" text="Password" onChange={event => setPassword(event.target.value)}/>
-                </div>
-                <button className="logInButton" onClick={() => login()}>Log in</button>
-                <p>Dont have an account? Sign up!</p>
-                <p>Problems logging in?</p>
-            </div>*/
         )
     }
 

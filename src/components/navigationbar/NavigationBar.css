@@ -34,3 +34,14 @@
 .profileNavigation {
   grid-column: 15;
 }
+
+#signInNavigation {
+  background-color: #aa9bff;
+  color: white;
+  border-radius: 15px;
+  border: none;
+  padding: 1vh 2vw 1vh 2vw;
+  margin: 0.7vw;
+  outline: none;
+  width: 4.5vw;
+}

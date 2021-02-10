@@ -2,6 +2,7 @@ import React from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import './multiCarousel.css'
 
 const MultiCarousel = ({items, title, subtitle}) => {
 
@@ -9,13 +10,10 @@ const MultiCarousel = ({items, title, subtitle}) => {
       dots: false,
       arrows: true,
       infinite: true,
-      speed: 800,
-      slidesToShow: 4,
+      slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: false,
-      autoplaySpeed: 3500,
       cssEase: "linear",
-      pauseOnHover: false,
     };
 
     const getItems = () => {

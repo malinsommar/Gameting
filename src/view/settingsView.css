@@ -54,7 +54,15 @@
 }
 
 #partnerSettingsSaveButton {
-  margin-top: 20px;
+  background-color: white;
+  color: #aa9bff;
+  border-radius: 15px;
+  border: none;
+  padding: 1vh 2vw 1vh 2vw;
+  margin: 0.7vw;
+  outline: none;
+  width: 80%;
+  margin-top: 4vh;
 }
 
 /* -- Account -- */
@@ -92,8 +100,15 @@
 }
 
 #changePasswordButton {
-  margin-top: 20px;
-  margin-left: 140px;
+  background-color: white;
+  color: #aa9bff;
+  border-radius: 15px;
+  border: none;
+  padding: 1vh 2vw 1vh 2vw;
+  margin: 0.7vw;
+  outline: none;
+  width: 90%;
+  margin-top: 4vh;
 }
 
 /* -- Games -- */

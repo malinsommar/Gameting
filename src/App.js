@@ -1,5 +1,6 @@
 import {Routing} from './routes/Routing'
 import {NavigationBar} from './components/navigationbar/NavigationBar'
+import {Footer} from './components/footer/Footer'
 import {AuthProvider} from './shared/global/provider/UserProvider'
 import {ThemeProvider} from '@material-ui/core'
 import themeUi from './themeUi'

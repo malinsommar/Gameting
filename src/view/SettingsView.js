@@ -8,7 +8,10 @@ import SelectField from '../components/textFields/selectFields'
 import PasswordField from '../components/textFields/passwordField'
 import GameCard from '../components/gameCard/gameCard'
 import './settingsView.css'
-import { fi } from 'date-fns/locale'
+
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+const firestore = firebase.firestore()
 
 export const SettingsView = () => {
 
@@ -20,42 +23,29 @@ export const SettingsView = () => {
     const [currentPassword, setCurrentPassword] = useState("")
     const [controlPassword, setControlPassword] = useState("")
     const [search, setSearch] = useState("")
+    const [currentMinAge, setCurrentMinAge] = useState("")
+    const [currentMaxAge, setCurrentMaxAge] = useState("")
+    const [currentPartnerSex, setCurrentPartnerSex] = useState("")
+    
 
     const [error, setError] = useState()
     const [loading, setLoading] = useState()
-    const [addedGames, setAddedGames] = useState([2,5,7])
+    const [addedGames, setAddedGames] = useState()
     const [notAddedGames, setNotAddedGames] = useState(games.games)
 
-    const {updatePassword, deleteAccount} = useAuth()
+    const {updatePassword, deleteAccount, currentUser} = useAuth()
+    
+    const userRef = firestore.collection('users').doc(currentUser.uid)
 
-    async function changePassword(e) {
-        e.preventDefault()
-
-        if (password !== currentPassword) {
-            return setError("Current password is incorrect")
-          }
-
-        if (password !== controlPassword) {
-            return setError("Passwords do not match")
-          }
-          
-        try {
-            setError("")
-            setLoading(true)
-            updatePassword(password)
-          } catch {
-            setError("Failed to update password")
-          }
-          setLoading(false)
-      }
-
-   /* useEffect(() => {
-        Axios.get("https://api.rawg.io/api/games?key=c457e24025af43f4bde3c84f917e67c1",{method: "head" ,mode: "no-cors"})
-        .then((response) => setData(response.data))
-        .catch((error) => console.log(error))
-        console.log(data);
-    })
-*/
+    useEffect(() => {
+        userRef.get().then(function(doc) {
+            setAddedGames(doc.data().games)
+            setCurrentMinAge(doc.data().searchMinAge)
+            setCurrentMaxAge(doc.data().searchMaxAge)
+            setCurrentPartnerSex(doc.data().searchSex)
+        })
+    }, [])
+    
     const selectView = () => {
         if(view === 0){
             return partnerSettingsView()
@@ -81,29 +71,100 @@ export const SettingsView = () => {
         )
     }
 
+    // --------  Partner settings  --------
+
+    const updatePartnerData = (e) => {
+        e.preventDefault()
+
+        return userRef.update({
+            searchMinAge: partnerMinAge,
+            searchMaxAge: partnerMaxAge,
+            searchSex: partnerSex
+        })
+        .then(function() {
+            alert("Document successfully updated!")
+            setPartnerMinAge("")
+            setPartnerMaxAge("")
+            partnerSex("")
+        })
+        .catch(function(error) {
+            console.error("Error updating document: ", error);
+        });
+    }
+    
+
     const partnerSettingsView = () => {
         return (
             <div>
                 <div className="settingsPartnerDiv">
                     <h1>Partner requirements</h1>
-                    <TextField type="standard-basic" text="Min age" onChange={event => setPartnerMinAge(event.target.value)}/>
-                    <TextField type="standard-basic" text="Max age" onChange={event => setPartnerMaxAge(event.target.value)}/>
-                    <SelectField /*onChange={event => setSex(event.target.value)}*/ />  
-                    <SaveSettingsButton id="partnerSettingsSaveButton" text="Save" />
+                    <form onSubmit={updatePartnerData}>
+                        <h3>Age: </h3>
+                        <label>Min </label>
+                        <input
+                            type='number'
+                            min="15"
+                            max="100"
+                            text="MinAge"
+                            value={currentMinAge}
+                            onChange={event => setPartnerMinAge(event.target.value)}
+                        />
+                        <label> Max </label>
+                        <input
+                            type='number'
+                            min="15"
+                            max="100"
+                            value={currentMaxAge}
+                            text="MaxAge"
+                            onChange={event => setPartnerMaxAge(event.target.value)}
+                        />
+                        <br /><br/>
+                        <h3>Sex: </h3>
+                        <input type="radio" value="Female" name="gender" checked={currentPartnerSex === "Female"} onChange={event => setPartnerSex(event.target.value)} /> Female <br/>
+                        <input type="radio" value="Male" name="gender" checked={currentPartnerSex === "Male"} onChange={event => setPartnerSex(event.target.value)} /> Male <br/>
+                        <input type="radio" value="Both" name="gender" checked={currentPartnerSex === "Both"} onChange={event => setPartnerSex(event.target.value)} /> Both
+                        <br />
+                        <input
+                            id="partnerSettingsSaveButton"
+                            type='submit'
+                        />
+                    </form>
                 </div>
             </div>
         )
     }
 
+    // --------  Account  --------
+
     const accountSettingsView = () => {
         return (
             <div style={{display:"flex", marginTop: "50px"}}>
                 <div className="settingsChangePasswordDiv">
-                    <h1>Chage password</h1>
-                    <PasswordField text="Current password" /> 
-                    <PasswordField text="New password" /> 
-                    <PasswordField text="Repeat new password" /> 
-                    <SaveSettingsButton id="changePasswordButton" text="Save"/> 
+                    <h1>Change password</h1>
+                    <form onSubmit={changePassword}>
+                        <p>Current password</p>
+                        <input
+                            type='text'
+                            onChange={event => setCurrentPassword(event.target.value)}
+                        />
+                        <br />
+                        <p>New password</p>
+                        <input
+                            type='text'
+                            onChange={event => setPassword(event.target.value)}
+                        />
+                        <br />
+                        <p>Repeat new password</p>
+                        <input
+                            type='text'
+                            onChange={event => setControlPassword(event.target.value)}
+                        />
+                        <br />
+                        <input
+                            id="changePasswordButton"
+                            type='submit'
+                        />
+                    </form>
                 </div>
                 <div className="settingsScaryButtonDiv">
                     <div className="scaryButtonText">
@@ -114,6 +175,41 @@ export const SettingsView = () => {
                 </div>
             </div>
         )
+    }
+
+    async function changePassword(e) {
+        e.preventDefault()
+
+        /*if (currentUser.password !== currentPassword) {
+            return setError("Current password is incorrect")
+          }*/
+
+        if (password !== controlPassword) {
+            alert("Passwords do not match")
+          } else {
+            try {
+                setError("")
+                setLoading(true)
+                updatePassword(password)
+            } catch {
+                setError("Failed to update password")
+            }
+            setLoading(false) 
+        }
+    }
+
+    // -------- Game settings --------
+
+    const updateGamesFirestore = (list) => {
+        userRef.update({
+            games: list
+        })
+        .then(function() {
+            console.log("Document successfully updated!")
+        })
+        .catch(function(error) {
+            console.error("Error updating document: ", error)
+        })
     }
 
     const addButton = (game) => {
@@ -149,9 +245,39 @@ export const SettingsView = () => {
                 setAddedGames(addedGames => [...addedGames, index])
             }
         })
+        //updateGamesFirestore()
     }
-    //setAddedGames(addedGames.sort((a, b) => (games.games[a].name > games.games[b].name) ? 1 : -1))
 
+    /*
+ const getUpdateListAdd = (game) => {
+        const updateList = []
+
+        games.games.map((item, index) => {
+            if(game.name === item.name){
+                updateList.push(index)
+            }
+        })
+
+        return updateList
+    }
+
+    const addGameToList = (game) => {
+        const tempList = [addedGames]
+        tempList.push(getUpdateListAdd(game))
+        updateGamesFirestore(tempList)
+        setAddedGames(tempList)
+    }
+    */
+
+    const getUpdateList = (game) => {
+        const updateList = addedGames.filter(item => item !== game)
+        return updateList
+    }
+
+    const deleteGame = (game) => {
+        updateGamesFirestore(getUpdateList(game))
+        setAddedGames(getUpdateList(game))
+    }
 
     const getNotAddedGameCards = () => {
         const sortedList = notAddedGames.sort((a, b) => (a.name > b.name) ? 1 : -1)
@@ -177,7 +303,7 @@ export const SettingsView = () => {
                     name={games.games[game].name} 
                     button="Delete" 
                     image={games.games[game].background_image} 
-                    onClick={() => setAddedGames(addedGames.filter(item => item !== game))}
+                    onClick={() => deleteGame(game)}
                 />
         )})
     }
@@ -205,6 +331,7 @@ export const SettingsView = () => {
                     <div style={{display:"inline-block", overflow:"overlay", height:"640px"}}>
                         {getAddedGameCards()}
                     </div>
+                    <button onClick={() => updateGamesFirestore(addedGames)}>Save</button>
                 </div>
                 <div className="settingsAddGamesDiv">
                     <h2>Add new games</h2>

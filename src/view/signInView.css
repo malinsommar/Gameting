@@ -10,8 +10,8 @@
 
 .findYourPlayerTwoDiv {
   background-color: #aa9bff;
-  height: 180px;
-  width: 350px;
+  height: 30vh;
+  width: 28vw;
   color: white;
   margin-top: 10vh;
 }
@@ -23,7 +23,7 @@
 
 .theMarioToYourPeachDiv {
   margin-top: 16vh;
-  width: 350px;
+  width: 28vw;
   text-align: center;
 }
 
@@ -36,36 +36,40 @@
 .logInDiv {
   background-color: #aa9bff;
   color: white;
-  width: 300px;
-  height: 400px;
+  width: 24vw;
+  height: 65vh;
   margin: 0 auto;
   margin-top: 10vh;
   text-align: center;
 }
 
 .logInDiv h2 {
-  font-size: 35px;
-  margin-bottom: 20px;
-}
-
-.logInPas {
-  margin-top: 10px;
-  margin-left: 42px;
-}
-
-.logInButton {
-  width: 130px;
-  height: 35px;
-  background-color: transparent;
-  color: white;
-  border: 1.5px solid white;
-  font-size: 19px;
-  outline: none;
-  cursor: pointer;
-  margin: 30px 0 10px 0;
+  font-size: 3vw;
+  margin-bottom: 3vh;
 }
 
 .logInDiv p {
-  font-size: 14px;
+  font-size: 1.1vw;
+}
+
+.inputField {
+  width: 14vw;
+  height: 3.2vh;
+  border: none;
+}
+
+.clickable {
   cursor: pointer;
+}
+
+.logInButton {
+  width: 14vw;
+  height: 5.5vh;
+  background-color: transparent;
+  color: white;
+  border: 1.5px solid white;
+  font-size: 1.5vw;
+  outline: none;
+  cursor: pointer;
+  margin: 30px 0 10px 0;
 }

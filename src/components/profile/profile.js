@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useAuth} from '../../shared/global/provider/UserProvider'
 import './profile.css'
 import {useHistory} from 'react-router-dom'
@@ -8,10 +8,23 @@ import SettingsIcon from '@material-ui/icons/SettingsOutlined'
 import MessageIcon from '@material-ui/icons/ForumOutlined'
 import MatchIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import LogOutIcon from '@material-ui/icons/ExitToAppOutlined'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export const Profile = () => {
     const history = useHistory()
-    const {signOut} = useAuth()
+    const {signOut, currentUser} = useAuth()
+    const firestore = firebase.firestore()
+    const userRef = firestore.collection('users').doc(currentUser.uid)
+    const [profileImage, setProfileImage] = useState("")
+
+    useEffect(() => {
+        userRef.get().then(function(doc) {
+            if(doc.data() === undefined || doc.data().profileImage === ""){
+                setProfileImage("https://afribary.com/authors/anonymous-user/photo")
+            } else setProfileImage(doc.data().profileImage)
+        })
+    }, [])
 
     const logout = () => {
         signOut()
@@ -20,7 +33,7 @@ export const Profile = () => {
 
     return(
         <div className="profileWrapper">
-            <img alt="your profile" className="profileImage" src={"https://thispersondoesnotexist.com/image"}/>
+            <img alt="your profile" className="profileImage" src={profileImage}/>
             <div className="profileDropDown">
                 <ul>
                     <li onClick={() => history.push(RoutingPath.profileView)}><ProfileIcon className="profileDropDownIcon" />My profile</li>

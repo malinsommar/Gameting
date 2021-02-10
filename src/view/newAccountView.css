@@ -1,0 +1,54 @@
+.newAccountPage {
+  display: flex;
+}
+
+.aboutYouDiv {
+}
+
+.yourPreferencesDiv {
+}
+
+.stepperDataCard {
+  background-color: rgb(252, 252, 252);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 50vw;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 3px;
+  padding: 5px 30px 15px 30px;
+  color: black;
+}
+
+.stepperContent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.stepperDataCard h1,
+h2 {
+  font-family: pixelFont;
+}
+
+.stepperDataCard span {
+}
+
+.stepperDataCard input {
+}
+
+.stepperLeft {
+  grid-column: 1;
+}
+
+.stepperRight {
+  grid-column: 2;
+}
+
+.stepperButtons {
+  text-align: end;
+  margin-top: 40px;
+  grid-column: 2;
+}
+
+#stepperImageUploader {
+}

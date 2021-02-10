@@ -6,7 +6,9 @@
 
 .profileImage {
   width: 10vh;
+  height: 10vh;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .profileDropDown {

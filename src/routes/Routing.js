@@ -1,9 +1,7 @@
-import React, {useEffect, useContext} from 'react'
+import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import {useAuth} from '../shared/global/provider/UserProvider'
-
 import RoutingPath from './RoutingPath'
-
 import {HomeView} from '../view/HomeView'
 import {ContactView} from '../view/ContactView'
 import {MatchRequestView} from '../view/MatchRequestView'
@@ -13,6 +11,8 @@ import {ProfileView} from '../view/ProfileView'
 import {SettingsView} from '../view/SettingsView'
 import {SignInView} from '../view/SignInView'
 import {SignUpView} from '../view/SignUpView'
+import {ResetPasswordView} from '../view/ForgotPasswordView'
+import {NewAccountView} from '../view/NewAccountView'
 
 export const Routing = (props) => {
 
@@ -23,7 +23,7 @@ export const Routing = (props) => {
     }
 
     const blockRouteIfNotAuthenticated = (navigateToView) => {
-        return !currentUser ? SignInView: navigateToView
+        return !currentUser ? SignInView : navigateToView
     }
 
     return(
@@ -39,6 +39,8 @@ export const Routing = (props) => {
                     <Route exact path={RoutingPath.profileView} component={blockRouteIfNotAuthenticated(ProfileView)}/>
                     <Route exact path={RoutingPath.settingsView} component={blockRouteIfNotAuthenticated(SettingsView)}/>
                     <Route exact path={RoutingPath.signUpView} component={blockRouteIfAuthenticated(SignUpView)}/>
+                    <Route exact path={RoutingPath.newAccountView} component={blockRouteIfNotAuthenticated(NewAccountView)}/>
+                    <Route exact path={RoutingPath.forgotPassword} component={blockRouteIfAuthenticated(ResetPasswordView)}/>
                     <Route component={blockRouteIfAuthenticated(SignInView)}/>
                 </Switch>
             </Router>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, userRef } from 'react'
+import React, { useState, useEffect} from 'react'
 import {useAuth} from '../shared/global/provider/UserProvider'
 import firebase from 'firebase/app'
 import SquareButton from '../components/buttons/squareButton/SquareBackground'
@@ -21,7 +21,7 @@ export const ProfileView = () => {
     const [name, setName] = useState()
     const [lastName, setLastName] = useState()
     const [sex, setSex] = useState()
-    const [birthday, setBirthday] = useState([])
+    const [age, setAge] = useState()
     const [searchSex, setSearchSex] = useState()
     const [favoriteGame, setFavoriteGame] = useState()
     const [games, setGames] = useState([])
@@ -36,9 +36,9 @@ export const ProfileView = () => {
             setName(doc.data().name)
             setLastName(doc.data().lastName)
             setSex(doc.data().sex)
-            setBirthday(doc.data().birthday)
+            setAge(doc.data().age)
             setSearchSex(doc.data().searchSex)
-            setFavoriteGame(gamesJson.games[doc.data().favoriteGame].name)
+            doc.data().favoriteGame === "" ? setFavoriteGame("???") : setFavoriteGame(gamesJson.games[doc.data().favoriteGame].name) 
             setGames(doc.data().games)
             setAboutMeText(doc.data().aboutMeText)
             setProfileImage(doc.data().profileImage)
@@ -59,7 +59,6 @@ export const ProfileView = () => {
             <div className="profileAboutImageBox">
                 <div className="profileImageDiv">
                     <img className="profileBigImage" alt="profile" src={profileImage}/>
-                    <button className="profileRequestButton">Send match request</button>
                 </div>
                 <div className="profileAboutMeDiv">
                     <div className="profileAboutMeInnerDiv">
@@ -76,10 +75,10 @@ export const ProfileView = () => {
             <div className="profileStatBox">
                 <h1>Stats</h1>
                 <ul className="profileStatList">
-                    <li><BirthDayIcon className="profileStatsIcon" />Birthday</li>
+                    <li><BirthDayIcon className="profileStatsIcon" />{age} y/o</li>
                     <li><GenderIcon className="profileStatsIcon" />{sex}</li>
                     <li><HeartIcon className="profileStatsIcon" />{searchSex}</li>
-                    <li><GamesIcon className="profileStatsIcon" />{favoriteGame}</li>
+                    <li style={{fontSize: "16px"}}><GamesIcon className="profileStatsIcon" />{favoriteGame}</li>
                 </ul>
             </div>
         )

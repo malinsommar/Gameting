@@ -1,4 +1,6 @@
 .matchRequestImageBox {
+  display: inline-block;
+  margin: 10px;
 }
 
 .matchRequestImage {
@@ -14,10 +16,10 @@
 }
 
 .profile {
+  background-color: white;
   position: relative;
   bottom: 40px;
-  left: 90px;
-  background-color: white;
+  left: 10px;
 }
 
 .accept {
