@@ -20,7 +20,7 @@ export const Profile = () => {
 
     useEffect(() => {
         userRef.get().then(function(doc) {
-            if(doc.data() === undefined || doc.data().profileImage === ""){
+            if(doc.data() === undefined){
                 setProfileImage("https://afribary.com/authors/anonymous-user/photo")
             } else setProfileImage(doc.data().profileImage)
         })

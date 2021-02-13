@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import games from '../data/games.json'
-import {useAuth} from '../shared/global/provider/UserProvider'
 import SquareButton from '../components/buttons/squareButton/SquareBackground'
-import SaveSettingsButton from '../components/buttons/saveSettings/SaveSettings'
-import TextField from '../components/textFields/textField'
-import SelectField from '../components/textFields/selectFields'
-import PasswordField from '../components/textFields/passwordField'
+import {useAuth} from '../shared/global/provider/UserProvider'
 import GameCard from '../components/gameCard/gameCard'
 import './settingsView.css'
 
@@ -26,7 +22,7 @@ export const SettingsView = () => {
     const [currentMinAge, setCurrentMinAge] = useState("")
     const [currentMaxAge, setCurrentMaxAge] = useState("")
     const [currentPartnerSex, setCurrentPartnerSex] = useState("")
-    
+    const [favoriteGame, setFavoriteGame] = useState("")
 
     const [error, setError] = useState()
     const [loading, setLoading] = useState()
@@ -43,6 +39,7 @@ export const SettingsView = () => {
             setCurrentMinAge(doc.data().searchMinAge)
             setCurrentMaxAge(doc.data().searchMaxAge)
             setCurrentPartnerSex(doc.data().searchSex)
+            setFavoriteGame(doc.data().favoriteGame)
         })
     }, [])
     
@@ -91,7 +88,6 @@ export const SettingsView = () => {
             console.error("Error updating document: ", error);
         });
     }
-    
 
     const partnerSettingsView = () => {
         return (
@@ -120,9 +116,9 @@ export const SettingsView = () => {
                         />
                         <br /><br/>
                         <h3>Sex: </h3>
-                        <input type="radio" value="Female" name="gender" checked={currentPartnerSex === "Female"} onChange={event => setPartnerSex(event.target.value)} /> Female <br/>
-                        <input type="radio" value="Male" name="gender" checked={currentPartnerSex === "Male"} onChange={event => setPartnerSex(event.target.value)} /> Male <br/>
-                        <input type="radio" value="Both" name="gender" checked={currentPartnerSex === "Both"} onChange={event => setPartnerSex(event.target.value)} /> Both
+                        <input type="radio" value="Female" name="gender" onChange={event => setPartnerSex(event.target.value)} /> Female <br/>
+                        <input type="radio" value="Male" name="gender" onChange={event => setPartnerSex(event.target.value)} /> Male <br/>
+                        <input type="radio" value="Both" name="gender" onChange={event => setPartnerSex(event.target.value)} /> Both
                         <br />
                         <input
                             id="partnerSettingsSaveButton"
@@ -144,19 +140,19 @@ export const SettingsView = () => {
                     <form onSubmit={changePassword}>
                         <p>Current password</p>
                         <input
-                            type='text'
+                            type='password'
                             onChange={event => setCurrentPassword(event.target.value)}
                         />
                         <br />
                         <p>New password</p>
                         <input
-                            type='text'
+                            type='password'
                             onChange={event => setPassword(event.target.value)}
                         />
                         <br />
                         <p>Repeat new password</p>
                         <input
-                            type='text'
+                            type='password'
                             onChange={event => setControlPassword(event.target.value)}
                         />
                         <br />
@@ -199,6 +195,20 @@ export const SettingsView = () => {
     }
 
     // -------- Game settings --------
+
+    
+    const updateFavoriteGameDataBase = (game) => {
+
+        return userRef.update({
+            favoriteGame: game
+        })
+        .then(function() {
+            console.log("Document successfully updated!")
+        })
+        .catch(function(error) {
+            console.error("Error updating document: ", error);
+        });
+    }
 
     const updateGamesFirestore = (list) => {
         userRef.update({
@@ -289,9 +299,21 @@ export const SettingsView = () => {
                     button={addButton(game)} 
                     disabled={disableButton(game)}
                     image={game.background_image} 
-                    onClick={ () => addGameToList(game)} 
+                    onClick={() => addGameToList(game)} 
+                    isFavorite={game.name === favoriteGame ? true : false}
                 />
         )})
+    }
+
+    const onClickHeart = (heart, game) => {
+        if(heart === 0) {
+            setFavoriteGame("")
+            updateFavoriteGameDataBase("")
+
+        } else if(heart === 1) {
+            setFavoriteGame(game)
+            updateFavoriteGameDataBase(game)        
+        }
     }
 
     const getAddedGameCards = () => {
@@ -304,6 +326,9 @@ export const SettingsView = () => {
                     button="Delete" 
                     image={games.games[game].background_image} 
                     onClick={() => deleteGame(game)}
+                    isFavorite={games.games[game].name === favoriteGame ? true : false}
+                    onFilledHeartClick={() => onClickHeart(0, games.games[game].name)}
+                    onOutlinedHeartClick={() => onClickHeart(1, games.games[game].name)}
                 />
         )})
     }
@@ -331,7 +356,7 @@ export const SettingsView = () => {
                     <div style={{display:"inline-block", overflow:"overlay", height:"640px"}}>
                         {getAddedGameCards()}
                     </div>
-                    <button onClick={() => updateGamesFirestore(addedGames)}>Save</button>
+                    <button className="saveGamesButton" onClick={() => updateGamesFirestore(addedGames)}>Save</button>
                 </div>
                 <div className="settingsAddGamesDiv">
                     <h2>Add new games</h2>

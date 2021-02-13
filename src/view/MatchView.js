@@ -23,24 +23,43 @@ export const MatchView = () => {
     const [overview, setOverview] = useState(0)
     const [view, setView] = useState(0)
     const [chosenProfile, setChosenProfile] = useState()
+    const [chosenProfileMatchRequests, setChosenProfileMatchRequests] = useState()
     const {currentUser} = useAuth()
-    
-   useEffect(() => {
+
+    useEffect(() => {
         firestore.collection('users').doc(currentUser.uid).get().then(function(doc) {
             currentUserData.push(doc.data())
         })
         firestore.collection("users").get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                if(currentUser.uid !== doc.data().userId && currentUserData[0].searchMinAge <= doc.data().age && currentUserData[0].searchMaxAge >= doc.data().age && currentUserData[0].searchSex === doc.data().sex && doc.data().searchMinAge <= currentUserData[0].age && doc.data().searchMaxAge >= currentUserData[0].age && doc.data().searchSex === currentUserData[0].sex){
-                    setUsers(users => [...users, doc.data()])
+                //This checks if the users match, checking both users sex and age.
+                if(currentUser.uid !== doc.data().userId && currentUserData[0].searchMinAge <= doc.data().age && currentUserData[0].searchMaxAge >= doc.data().age && doc.data().searchMinAge <= currentUserData[0].age && doc.data().searchMaxAge >= currentUserData[0].age){
+                    if(currentUserData[0].searchSex === doc.data().sex || currentUserData[0].searchSex === "Both"){
+                        if(doc.data().searchSex === currentUserData[0].sex || doc.data().searchSex === "Both") {
+                            setUsers(users => [...users, doc.data()])
 
-                    if(currentUserData[0].favoriteGame === doc.data().favoriteGame){
-                        setUsersSameFavoriteGame(usersSameFavoriteGame => [...usersSameFavoriteGame, doc.data()])
+                            if(currentUserData[0].favoriteGame === doc.data().favoriteGame && currentUserData[0].favoriteGame !== ""){
+                                setUsersSameFavoriteGame(usersSameFavoriteGame => [...usersSameFavoriteGame, doc.data()])
+                            }
+                        }
                     }
                 }
             })
         })
     }, [])
+
+    const updateRequestFirestore = (list) => {
+
+        return firestore.collection('users').doc(chosenProfile.userId).update({
+            matchRequests: list
+        })
+        .then(function() {
+            console.log("Document successfully updated!")
+        })
+        .catch(function(error) {
+            console.error("Error updating document: ", error);
+        });
+    }
 
     const getOverview = () => {
         if(overview === 0) {
@@ -67,6 +86,7 @@ export const MatchView = () => {
 
     const changeToProfileView = (user) => {
         setChosenProfile(user)
+        setChosenProfileMatchRequests(user.matchRequests)
         setOverview(1)
     }
 
@@ -92,13 +112,34 @@ export const MatchView = () => {
             </div>
         )
     }
+
+    const getUpdateRequests = (request) => {
+        const updateList = chosenProfile.matchRequests
+        updateList.push(request)
+        return updateList
+    }
+
+    const onSendMatchRequest = () => {
+        updateRequestFirestore(getUpdateRequests(currentUser.uid))
+        setChosenProfileMatchRequests(getUpdateRequests(currentUser.uid))
+    }
+
+    const disableIfRequestSent = () => {
+        let disabled = false
+        chosenProfileMatchRequests.map((item) => {
+            if(item === currentUser.uid) {
+                disabled = true
+            }
+        })
+        return disabled
+    }
     
     const aboutYouBox = () => {
         return(
             <div className="profileAboutImageBox">
                 <div className="profileImageDiv">
                     <img className="profileBigImage" alt="profile" src={chosenProfile.profileImage}/>
-                    <button className="profileRequestButton">Send match request</button>
+                    <button disabled={disableIfRequestSent()} onClick={() => onSendMatchRequest()} className="profileRequestButton">Send match request</button>
                 </div>
                 <div className="profileAboutMeDiv">
                     <div className="profileAboutMeInnerDiv">

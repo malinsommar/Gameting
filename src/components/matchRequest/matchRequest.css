@@ -1,5 +1,13 @@
-.matchRequestImageBox {
+.requestDiv {
   display: inline-block;
+  width: 19vw;
+}
+
+.requestDiv h2 {
+  margin-top: -3vh;
+}
+
+.matchRequestImageBox {
   margin: 10px;
 }
 
@@ -7,19 +15,21 @@
   width: 220px;
   height: 300px;
   object-fit: cover;
+  border-radius: 3px;
 }
 
 .matchRequestButton {
   border-radius: 10px;
   border: none;
   padding: 5px 20px 5px 20px;
+  margin: 0 1vw;
 }
 
 .profile {
   background-color: white;
   position: relative;
-  bottom: 40px;
-  left: 10px;
+  bottom: 6vh;
+  right: 3.5vw;
 }
 
 .accept {

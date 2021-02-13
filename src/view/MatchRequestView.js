@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react'
-import MultiCarousel from '../components/multiCarousel/MultiCarousel'
 import MatchRequests from '../components/matchRequest/MatchRequest'
 import SquareButton from '../components/buttons/squareButton/SquareBackground'
 import SmallGameCard from '../components/gameCard/smallGameCard'
@@ -40,7 +39,11 @@ export const MatchRequestView = () => {
         if(overview === 0) {
             return(
                 <div className="matchPageView">
-                 <MultiCarousel items={getMatchRequests()} title="Your requests" subtitle={subTitle} />
+                <h1>Match requests</h1>
+                {users > 0 ? <p>Looks like someone would like to get to know you! </p> : <p>Doesn't look like you have any requests atm.. </p>}
+                <div className="matchRequestDiv">
+                    {getMatchRequests()}
+                </div>
                 </div>
             )
         } else return(
@@ -60,8 +63,6 @@ export const MatchRequestView = () => {
         setChosenProfile(user)
         setOverview(1)
     }
-
-    const subTitle = `Looks like you have ${users.length} requests`
 
     const getMatchRequests = () => {
         return users.map((item, index) => {

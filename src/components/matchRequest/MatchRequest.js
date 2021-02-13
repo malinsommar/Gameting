@@ -3,7 +3,7 @@ import './matchRequest.css'
 
 const MatchRequest = ({image, name, profileOnClick, acceptOnClick, declineOnClick}) => {
     return (
-        <div>
+        <div className="requestDiv">
             <div className="matchRequestImageBox">
                 <img className="matchRequestImage" alt="Match request" src={image}/>
                 <button onClick={profileOnClick} className="matchRequestButton profile">View profile</button>

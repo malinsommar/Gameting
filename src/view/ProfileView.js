@@ -6,6 +6,7 @@ import SmallGameCard from '../components/gameCard/smallGameCard'
 import PhotoGallery from '../components/imageGrid/PhotoGallery'
 import ImageGrid from '../components/imageGrid/ImageGrid'
 import BirthDayIcon from '@material-ui/icons/CakeOutlined'
+import SaveIcon from '@material-ui/icons/Save'
 import HeartIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import GenderIcon from '@material-ui/icons/WcOutlined'
 import GamesIcon from '@material-ui/icons/SportsEsportsOutlined'
@@ -28,6 +29,8 @@ export const ProfileView = () => {
     const [aboutMeText, setAboutMeText] = useState()
     const [profileImage, setProfileImage] = useState()
     const [images, setImages] = useState([])
+    const [editMode, setEditMode] = useState(0)
+    const [editAboutMeText, setEditAboutMeText] = useState()
 
     const userRef = firestore.collection('users').doc(currentUser.uid)
     
@@ -38,13 +41,26 @@ export const ProfileView = () => {
             setSex(doc.data().sex)
             setAge(doc.data().age)
             setSearchSex(doc.data().searchSex)
-            doc.data().favoriteGame === "" ? setFavoriteGame("???") : setFavoriteGame(gamesJson.games[doc.data().favoriteGame].name) 
+            doc.data().favoriteGame === "" ? setFavoriteGame("???") : setFavoriteGame(doc.data().favoriteGame)
             setGames(doc.data().games)
             setAboutMeText(doc.data().aboutMeText)
+            setEditAboutMeText(doc.data().aboutMeText)
             setProfileImage(doc.data().profileImage)
             setImages(doc.data().images)
         })
     }, [])
+    
+    const toggleEditMode = () => {
+        if(editMode === 0) {
+            setEditMode(1)
+        } else setEditMode(0)
+    }
+
+    const onSaveAboutMeText = () => {
+        userRef.update({
+            aboutMeText: editAboutMeText
+        })
+    }
 
     const nameDiv = () => {
         return (
@@ -53,17 +69,29 @@ export const ProfileView = () => {
             </div>
         )
     }
+
+    const checkIfProfileImage = () => {
+        if(profileImage === "") {
+            return "https://www.cellmark.co.uk/media/1526/anonymous-avatar-icon-25.jpg"
+        } else return profileImage
+    }
     
     const aboutYouBox = () => {
         return(
             <div className="profileAboutImageBox">
                 <div className="profileImageDiv">
-                    <img className="profileBigImage" alt="profile" src={profileImage}/>
+                    <img className="profileBigImage" alt="profile" src={checkIfProfileImage()}/>
+                    <button onClick={() => toggleEditMode()} className="profileRequestButton">{editMode === 1 ? "Exit edit mode" : "Edit profile"}</button>
                 </div>
                 <div className="profileAboutMeDiv">
                     <div className="profileAboutMeInnerDiv">
                         <h3 className="profileAboutMeTitle">About me</h3>
-                        <p className="profileAboutMeText">{aboutMeText}</p>
+                        {editMode === 1 
+                        ? <div className="aboutMeEditDiv">
+                            <textarea onChange={event => setEditAboutMeText(event.target.value)} type="text" value={editAboutMeText}  />
+                            <button onClick={() => onSaveAboutMeText()}>Save</button>
+                        </div> 
+                        : <p className="profileAboutMeText">{aboutMeText}</p>}
                     </div>
                  </div>
             </div>

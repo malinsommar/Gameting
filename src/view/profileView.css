@@ -49,6 +49,7 @@
   margin: 0.7vw;
   outline: none;
   font-size: 1.1vw;
+  cursor: pointer;
 }
 
 .profileRequestButton:hover {
@@ -156,4 +157,24 @@
   height: 64vh;
   width: 35vw;
   overflow: overlay;
+}
+
+.aboutMeEditDiv textarea {
+  width: 16vw;
+  height: 18vh;
+}
+
+.aboutMeEditDiv button {
+  width: 16.4vw;
+  height: 3vh;
+  background-color: white;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 2px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.aboutMeEditDiv button:hover {
+  transition: 0.5s;
+  color: #9584ff;
 }

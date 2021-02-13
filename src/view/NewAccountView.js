@@ -1,109 +1,3 @@
-/*import React, {useState} from 'react'
-import firebase from 'firebase/app'
-import RoutingPath from '../routes/RoutingPath'
-import { useHistory } from 'react-router-dom'
-import {useAuth} from '../shared/global/provider/UserProvider'
-import 'firebase/firestore'
-import './newAccountView.css'
-
-export const NewAccountView = () => {
-    const history = useHistory()
-    const {currentUser} = useAuth()
-    const firestore = firebase.firestore()
-    const [error, setError] = useState("")
-
-    const [name, setName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [age, setAge] = useState()
-    const [sex, setSex] = useState()
-    const [maxAge, setMaxAge] = useState("")
-    const [minAge, setMinAge] = useState("")
-    const [searchSex, setSeachSex] = useState("")
-
-    const setUserData = (e) => {
-
-        firestore.collection("users").doc(currentUser.uid).set({
-          name: name,
-          lastName: lastName,
-          age: age,
-          sex: sex,
-          profileImage: "",
-          searchMaxAge: maxAge,
-          searchMinAge: minAge,
-          searchSex: searchSex,
-          aboutMeText: "",
-          favoriteGame: "",
-          games: [],
-          images: [],
-          userId: currentUser.uid
-        })
-        .then(function() {
-          console.log("Document successfully written!")
-          history.push("/home")
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error)
-          setError("Something went wrong, try again later")
-        })
-    }
-
-    return(
-        <div className="newAccountPage">
-            <h1>We want to get to know you before you get started!</h1>
-            <div className="aboutYouDiv">
-                <h1>About you</h1>
-                <p>Name</p>
-                <input
-                    type='text'
-                    onChange={event => setName(event.target.value)}
-                /> <br />
-                <p>Last name</p>
-                <input
-                    type='text'
-                    onChange={event => setLastName(event.target.value)}
-                /> <br />
-                <p>Age</p>
-                <input
-                    type='text'
-                    onChange={event => setAge(event.target.value)}
-                /> <br />
-                <p>Sex</p>
-                <input
-                    type='text'
-                    onChange={event => setSex(event.target.value)}
-                /> <br />
-                <p>Profile image</p>
-                
-            </div>
-            <div className="yourPreferencesDiv">
-                <h1>Your preferences</h1>
-                <p>Sex</p>
-                <input
-                    type='text'
-                    onChange={event => setSeachSex(event.target.value)}
-                /> <br />
-                <p>Minimum age</p>
-                <input
-                    type='text'
-                    onChange={event => setMinAge(event.target.value)}
-                /> <br />
-                <p>Maximum age</p>
-                <input
-                    type='text'
-                    onChange={event => setMaxAge(event.target.value)}
-                /> <br />
-            </div>
-            <button onClick={setUserData}>Done</button>
-        </div>
-    )
-}
-
-*/
-
-
-
-
-
 import React, {useState} from 'react'
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -117,7 +11,6 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
-import DatePicker from '../components/datePicker/datePicker';
 import ImageUploader from '../components/imageUploader/singleImageUploader';
 import TextField from '../components/textFields/textField'
 import SelectField from '../components/textFields/selectFields'
@@ -290,12 +183,12 @@ const useQontoStepIconStyles = makeStyles({
       lastName: lastName,
       age: age,
       sex: sex,
-      profileImage: "",
+      profileImage: profileImage,
       searchMaxAge: maxAge,
       searchMinAge: minAge,
       searchSex: searchSex,
       aboutMeText: "",
-      favoriteGame: profileImage,
+      favoriteGame: "",
       games: [],
       images: [],
       matchRequests: [],
@@ -350,10 +243,10 @@ const useQontoStepIconStyles = makeStyles({
           <TextField type="standard-basic" text="Age*" onChange={event => setAge(event.target.value)}/>
        </div>
        <div className="stepperRight">
-          <TextField type="standard-basic" text="Last name*" onChange={event => setName(event.target.value)}/>
+          <TextField type="standard-basic" text="Last name*" onChange={event => setLastName(event.target.value)}/>
           <br /> <br />
-          <input type="radio" value="Female" name="gender"onChange={event => setSearchSex(event.target.value)} /> Female 
-          <input type="radio" value="Male" name="gender" onChange={event => setSearchSex(event.target.value)} /> Male 
+          <input type="radio" value="Female" name="gender" onChange={event => setSex(event.target.value)} /> Female 
+          <input type="radio" value="Male" name="gender" onChange={event => setSex(event.target.value)} /> Male 
         </div>
        {getStepperButtons()}
        </div>
@@ -364,8 +257,11 @@ const useQontoStepIconStyles = makeStyles({
         <h1>Images:</h1>
         <div className="stepperContent">
           <p>OBS! Tillfälligt tar jag bilder via deras bildadress. </p>
-
-          <TextField type="standard-basic" text="Profile image" onChange={event => setProfileImage(event.target.value)}/>
+          <input
+          type='text'
+          onChange={event => setProfileImage(event.target.value)}
+          />
+          <ImageUploader />
         </div>
         {getStepperButtons()}
       </div>
@@ -377,9 +273,9 @@ const useQontoStepIconStyles = makeStyles({
         <TextField type="standard-basic" text="Max age" onChange={event => setMaxAge(event.target.value)}/>
         <div>
         <br />
-          <input type="radio" value="Female" name="gender"onChange={event => setSex(event.target.value)} /> Female 
-          <input type="radio" value="Male" name="gender" onChange={event => setSex(event.target.value)} /> Male 
-          <input type="radio" value="Both" name="gender" onChange={event => setSex(event.target.value)} /> Both     
+          <input type="radio" value="Female" name="gender"onChange={event => setSearchSex(event.target.value)} /> Female 
+          <input type="radio" value="Male" name="gender" onChange={event => setSearchSex(event.target.value)} /> Male 
+          <input type="radio" value="Both" name="gender" onChange={event => setSearchSex(event.target.value)} /> Both     
         </div>    
         {getStepperButtons()}
       </div>

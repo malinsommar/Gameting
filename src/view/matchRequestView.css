@@ -1,2 +1,7 @@
 .matchPageView {
+  text-align: center;
+}
+
+.matchRequestDiv {
+  display: flex;
 }

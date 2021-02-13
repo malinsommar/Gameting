@@ -61,3 +61,7 @@
 .smallGameCard:hover h1 {
   color: #aa9bff;
 }
+
+.heartButton {
+  outline: none;
+}

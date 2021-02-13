@@ -19,7 +19,7 @@ export const SignInView = () => {
         signIn(mail, password)
         history.push("/home")
       } catch {
-        setError("Failed to log in")
+        setError("Somehing went wrong, try again.")
       }
       setLoading(false)
   }
@@ -61,7 +61,8 @@ export const SignInView = () => {
                         className="logInButton"
                         type='submit'
                         value="Login"
-                    />
+                    /> <br />
+                    <label>{error}</label>
                 </form>
                 <p className="clickable" onClick={() => history.push("/signUp")}>Dont have an account? Sign up!</p>
                 <p className="clickable" onClick={() => history.push("/resetPassword")}>Forgot your password?</p>
